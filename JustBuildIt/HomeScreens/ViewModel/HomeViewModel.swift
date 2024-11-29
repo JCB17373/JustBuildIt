@@ -10,6 +10,12 @@ import SwiftUI
 
 @MainActor class HomeViewModel: ObservableObject {
     @Published var products: [HomeModel] = []
+    var categories: [String: [HomeModel]]{
+          Dictionary(
+              grouping: products,
+              by: { $0.category }
+          )
+      }
     func loadProducts(completion: (Bool) -> Void ) async{
         do{
             self.products = try await NetworkManager
@@ -18,7 +24,6 @@ import SwiftUI
                     as: [HomeModel].self
                 )
             completion(true)
-            print(self.products)
         }catch {
             completion(false)
             

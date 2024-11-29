@@ -19,13 +19,18 @@ struct HomeScreen: View {
         ZStack {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(alignment: .top, spacing: 0){
+                                HomeCategoryRow(categories: viewModel.categories)
+                            }
+                        }
+                        .frame(height: 200)
                     LazyVGrid(columns: columns, spacing: 10){
                         ForEach(viewModel.products) { products in
                             GridProductCell(products: products)
                         }
                     }
-                }
-                .navigationTitle("Lets Build it")
+                    .navigationTitle("Pseudo Store")
                     .task {
                         loaderManager.isLoading = true
                         await viewModel.loadProducts { success in
@@ -45,6 +50,8 @@ struct HomeScreen: View {
                             }
                         }
                     }
+                }
+                
             }
             if loaderManager.isLoading {
                 LoaderView()
