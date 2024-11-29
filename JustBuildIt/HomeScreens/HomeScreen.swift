@@ -12,15 +12,20 @@ struct HomeScreen: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var toast: Toast? = nil
     @State private var isError = false
+    let columns = [
+        GridItem(.fixed((UIScreen.main.bounds.width/2) - 10)),         GridItem(.fixed((UIScreen.main.bounds.width/2) - 10))
+    ]
     var body: some View {
         ZStack {
             NavigationView {
-                List(viewModel.products){ products in
-                    VStack(alignment: .leading) {
-                        Text(products.title).font(.headline)
-                        Text(products.description).font(.subheadline)
+                ScrollView(.vertical, showsIndicators: false) {
+                    LazyVGrid(columns: columns, spacing: 10){
+                        ForEach(viewModel.products) { products in
+                            GridProductCell(products: products)
+                        }
                     }
-                }.navigationTitle("Lets Build it")
+                }
+                .navigationTitle("Lets Build it")
                     .task {
                         loaderManager.isLoading = true
                         await viewModel.loadProducts { success in
