@@ -14,7 +14,7 @@ struct GridProductCell: View {
         NavigationLink {
             
         }label:{
-            VStack(alignment: .leading){
+            VStack(alignment: .center){
                 AsyncImage(url: URL(string: products.image)) { image in
                     image.resizable()
                 } placeholder: {

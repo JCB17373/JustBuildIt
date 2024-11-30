@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
-import Combine
 struct HomeScreen: View {
     @EnvironmentObject var loaderManager: LoaderManager
     @StateObject private var viewModel = HomeViewModel()
     @State private var toast: Toast? = nil
-    @State private var isError = false
     let columns = [
-        GridItem(.fixed((UIScreen.main.bounds.width/2) - 10)),         GridItem(.fixed((UIScreen.main.bounds.width/2) - 10))
+        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
     var body: some View {
         ZStack {
-            NavigationView {
+            NavigationStack {
                 ScrollView(.vertical, showsIndicators: false) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(alignment: .top, spacing: 0){
@@ -41,7 +40,6 @@ struct HomeScreen: View {
                             }else{
                                 DispatchQueue.main.async {
                                     loaderManager.isLoading = false
-                                    self.isError = true
                                     toast = Toast(
                                         style: .error,
                                         message: "Something went wrong!"
