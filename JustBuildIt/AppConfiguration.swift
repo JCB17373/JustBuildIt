@@ -10,6 +10,7 @@ enum APIEndpoint: String{
     static let baseURL = "https://fakestoreapi.com"
     case getProducts = "/products"
     case getCategories = "/products/categories"
+    case getCategoryProducts = "/products/category"
     var url: String {
         return "\(APIEndpoint.baseURL)\(self.rawValue)"
     }

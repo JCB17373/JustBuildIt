@@ -16,7 +16,7 @@ struct HomeCategoryRow: View {
                 HStack(alignment: .top, spacing: 0){
                     ForEach(categories.keys.sorted(), id: \.self){ categories in
                         NavigationLink {
-                           
+                            CategoryProductsScreen(categoryId: categories)
                         }label:{
                             VStack{
                                 AsyncImage(url: URL(string: "")) { image in

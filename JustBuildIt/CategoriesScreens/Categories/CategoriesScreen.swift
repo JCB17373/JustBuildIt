@@ -17,7 +17,7 @@ struct CategoriesScreen: View {
 //                Divider()
                 List(viewModel.categories, id: \.self) { category in
                     NavigationLink{
-                        
+                        CategoryProductsScreen(categoryId: category)
                     }label: {
                         HStack {
                             Image("letsBuildIt")
@@ -28,9 +28,6 @@ struct CategoriesScreen: View {
                                 .padding()
                                 .font(.headline)
                                 .foregroundColor(Color("AccentColor"))
-                                .onTapGesture {
-                                    print("\(category) tapped")
-                                }
                         }
                         
                     }
