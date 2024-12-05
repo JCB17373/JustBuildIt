@@ -18,6 +18,7 @@ struct CategoriesScreen: View {
                 List(viewModel.categories, id: \.self) { category in
                     NavigationLink{
                         CategoryProductsScreen(categoryId: category)
+                            .toolbar(.hidden, for: .tabBar)
                     }label: {
                         HStack {
                             Image("letsBuildIt")

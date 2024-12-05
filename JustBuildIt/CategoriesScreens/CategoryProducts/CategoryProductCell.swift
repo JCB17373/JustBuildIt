@@ -13,7 +13,8 @@ struct CategoryProductCell: View {
     var body: some View {
         ZStack{
             NavigationLink{
-                
+                ProductDetailScreen()
+                    .toolbar(.hidden, for: .tabBar)
             }label:{
                 VStack(alignment: .center){
                     AsyncImage(url: URL(string: products.image)) { image in
